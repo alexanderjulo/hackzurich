@@ -58,8 +58,6 @@ class APITestCase(BaseTestCase):
         db.session.commit()
 
         r = self.client.get('/api/search/speck')
-        print r.data
-        print r.status_code
         assert r.status_code == 200
         assert r.json is not None
         products = r.json
