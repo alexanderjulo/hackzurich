@@ -9,7 +9,7 @@ manager = Manager(create_app)
 
 
 @manager.option('-v', '--verbose', help='Print a log')
-def crawl():
+def crawl(verbose=False):
     crawler.crawl()
 
 
