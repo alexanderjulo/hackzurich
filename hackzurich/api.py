@@ -138,18 +138,21 @@ class APIView(FlaskView):
             URL: `/api/search/<term>`
 
             Search for a term within product name, product subtitle,
-            category name and category description.
+            category name and category description. Use an english word
+            and it will be automatically translated.
 
             Will output all data as a json encoded list.
         """
-        like = "%{0}%"
+
+        german = translate(term, source="EN", target="DE")
+        like = "%{0}%".format(german)
         category = aliased(Category)
         query = Product.query.join(category).filter(
             or_(
-                Product.name.ilike(like.format(term)),
-                Product.subtitle.ilike(like.format(term)),
-                category.name.ilike(like.format(term)),
-                category.description.ilike(like.format(term))
+                Product.name.ilike(like),
+                Product.subtitle.ilike(like),
+                category.name.ilike(like),
+                category.description.ilike(like)
             )
         )
 
