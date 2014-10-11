@@ -74,7 +74,9 @@ class HerokuConfigObject(EnvironmentConfigObject):
 
     def load_config(self):
         super(EnvironmentConfigObject, self).load_config()
-        self.SQLALCHEMY_DATABASE_URI = self.DATABASE_URL
+        print environ.items()
+        if hasattr(self, "DATABASE_URL"):
+            self.SQLALCHEMY_DATABASE_URI = self.DATABASE_URL
 
 
 class CircleCIConfigObject(EnvironmentConfigObject):
