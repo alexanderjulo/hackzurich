@@ -142,14 +142,14 @@ class APIView(FlaskView):
 
             Will output all data as a json encoded list.
         """
-        like = "%%%s%%"
+        like = "%{0}%"
         category = aliased(Category)
         query = Product.query.join(category).filter(
             or_(
-                Product.name.like(like % term),
-                Product.subtitle.like(like % term),
-                category.name.like(like % term),
-                category.description.like(like % term)
+                Product.name.like(like.format(term)),
+                Product.subtitle.like(like.format(term)),
+                category.name.like(like.format(term)),
+                category.description.like(like.format(term))
             )
         )
 
