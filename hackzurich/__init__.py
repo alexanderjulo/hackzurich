@@ -1,5 +1,6 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from .config import get_config
 
 
 def create_app(configObject=False):
@@ -7,6 +8,8 @@ def create_app(configObject=False):
 
     if configObject:
         app.config.from_object(configObject)
+    else:
+        app.config.from_object(get_config(app))
 
     db.init_app(app)
 
