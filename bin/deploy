@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# disable app
+bin/heroku maintenance:on
+
+# push code to heroku
+git push git@heroku.com:hackzurich14.git $CIRCLE_SHA1:refs/heads/master
+
+# run migrations
+bin/heroku run alembic upgrade head
+
+# re-enable application
+bin/heroku maintenance:off

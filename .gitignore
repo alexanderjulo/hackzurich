@@ -1,2 +1,4 @@
 .venv/
 .idea
+products.sqlite
+config.py

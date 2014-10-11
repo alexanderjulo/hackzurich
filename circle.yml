@@ -1,0 +1,19 @@
+machine:
+    python:
+        version: 2.7.6
+    environment:
+        SQLALCHEMY_DATABASE_URI: postgres://ubuntu@localhost/circle_test
+        CIRCLECI: 1
+dependencies:
+    override:
+        - pip install -r requirements.txt
+    post:
+        - pip install psycopg2
+test:
+    override:
+        - nosetests tests
+deployment:
+    production:
+        branch: master
+        commands:
+            - bin/deploy
