@@ -16,10 +16,8 @@ class ConfigObjectRegistry(type):
             cls.entries.append(cls)
 
 
-class ConfigObject(Config):
+class ConfigObject(object):
     """
-        ConfigObjects are dervied from the flask Config class so they
-        can take advantage of their functionality. Additionally
         ConfigObjectRegistry is used to construct them so it
         automatically gets added to the index.
 
@@ -92,8 +90,11 @@ class FileConfigObject(ConfigObject):
     """
 
     def load_config(self):
-        self.from_pyfile(path.join(path.dirname(current_app.root_path),
-                                   'config.py'))
+        config = Config(current_app.root_path)
+        config.from_pyfile(path.join(path.dirname(current_app.root_path),
+                                     'config.py'))
+        for option, value in config.items():
+            setattr(self, option, value)
 
     def is_relevant(self):
         return (path.exists(path.join(path.dirname(current_app.root_path),
@@ -111,7 +112,7 @@ def get_configs(app):
     with app.app_context():
         relevant = []
         for Configobject in ConfigObjectRegistry.entries:
-            configobject = Configobject(app)
+            configobject = Configobject()
             if configobject.is_relevant():
                 configobject.load_config()
                 relevant.append(configobject)
