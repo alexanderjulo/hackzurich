@@ -22,6 +22,9 @@ def create_app(configObject=False):
     import api
     api.setUp(app)
 
+    import web
+    web.setUp(app)
+
     return app
 
 
