@@ -146,10 +146,10 @@ class APIView(FlaskView):
         category = aliased(Category)
         query = Product.query.join(category).filter(
             or_(
-                Product.name.like(like.format(term)),
-                Product.subtitle.like(like.format(term)),
-                category.name.like(like.format(term)),
-                category.description.like(like.format(term))
+                Product.name.ilike(like.format(term)),
+                Product.subtitle.ilike(like.format(term)),
+                category.name.ilike(like.format(term)),
+                category.description.ilike(like.format(term))
             )
         )
 
