@@ -72,6 +72,10 @@ class HerokuConfigObject(EnvironmentConfigObject):
     def is_relevant(self):
         return (environ.get("HEROKU"))
 
+    def load_config(self):
+        super(EnvironmentConfigObject, self).load_config()
+        self.SQLALCHEMY_DATABASE_URI = self.DATABASE_URL
+
 
 class CircleCIConfigObject(EnvironmentConfigObject):
     """
