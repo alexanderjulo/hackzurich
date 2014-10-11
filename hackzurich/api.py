@@ -1,7 +1,9 @@
 import json
-from flask import jsonify, request
-from flask.ext.classy import FlaskView
-from .models import Product, RecipeCache
+from sqlalchemy import or_
+from sqlalchemy.orm import aliased
+from flask import jsonify, request, Response
+from flask.ext.classy import FlaskView, route
+from .models import Product, RecipeCache, Category
 from .translate import translate
 from . import yummly, db
 
@@ -122,6 +124,38 @@ class APIView(FlaskView):
             })
 
         return jsonify(response), 200
+
+    def search(self, term):
+        like = "%%%s%%"
+        category = aliased(Category)
+        query = Product.query.join(category).filter(
+            or_(
+                Product.name.like(like % term),
+                Product.subtitle.like(like % term),
+                category.name.like(like % term),
+                category.description.like(like % term)
+            )
+        )
+
+        print query
+
+        products = query.all()
+
+        print products
+
+        response = []
+        for product in products:
+            response.append({
+                'id': product.id,
+                'name': product.name,
+                'subtitle': product.subtitle,
+                'ean': product.ean,
+                'migros_id': product.migros_id,
+            })
+        return Response(
+            json.dumps(response),
+            mimetype="application/json"
+        ), 200 if len(response) > 0 else 404
 
 
 def setUp(app):

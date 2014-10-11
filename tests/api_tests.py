@@ -41,3 +41,26 @@ class APITestCase(BaseTestCase):
             RecipeCache.product_id == bacon.id
         ).all()
         assert len(recipes) > 0
+
+    def test_search(self):
+        """
+            Check search results are complete
+        """
+        bacon = ProductFactory()
+        notbaconbutrelated = ProductFactory()
+        notbaconbutrelated.name = "banane"
+        notbaconbutrelated.subtitle = "In Specksaft gelagert"
+        notatallbacon = ProductFactory()
+        notatallbacon.name = "lauch"
+        baconcategory = ProductFactory()
+        db.session.flush()
+        baconcategory.category.name = "Speck"
+        db.session.commit()
+
+        r = self.client.get('/api/search/speck')
+        print r.data
+        print r.status_code
+        assert r.status_code == 200
+        assert r.json is not None
+        products = r.json
+        assert len(products) == 3
