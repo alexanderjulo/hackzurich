@@ -1,4 +1,5 @@
 from hackzurich import db
+from hackzurich.models import RecipeCache
 from . import BaseTestCase
 from .model_tests import ProductFactory
 
@@ -29,9 +30,14 @@ class APITestCase(BaseTestCase):
         """
             Verify that recipe retrieval works
         """
-        ProductFactory()
+        bacon = ProductFactory()
         db.session.flush()
         r = self.client.get('/api/2254623003971?recipes=1')
         assert r.status_code == 200
         recipes = r.json.get('recipes')
         assert recipes is not None and len(recipes) > 0
+
+        recipes = RecipeCache.query.filter(
+            RecipeCache.product_id == bacon.id
+        ).all()
+        assert len(recipes) > 0

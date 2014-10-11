@@ -1,8 +1,9 @@
+import json
 from flask import jsonify, request
 from flask.ext.classy import FlaskView
-from .models import Product
+from .models import Product, RecipeCache
 from .translate import translate
-from . import yummly
+from . import yummly, db
 
 
 def add_cors_support(response):
@@ -68,8 +69,22 @@ class APIView(FlaskView):
 
         english = translate(product.name)
 
-        if request.args.get('recipes') :
-            recipes = yummly.search(english)['matches']
+        if request.args.get("recipes") and request.args.get("recipes") == 1:
+            recipes = RecipeCache.query.filter(
+                RecipeCache.product_id == product.id
+            ).all()
+            if not recipes:
+                recipes = yummly.search(english)['matches']
+                for recipe in recipes:
+                    cache = RecipeCache()
+                    cache.product_id = product.id
+                    cache.yummly_id = recipe['id']
+                    cache.json = json.dumps(recipe)
+                    db.session.add(cache)
+                db.session.commit()
+                recipes = RecipeCache.query.filter(
+                    RecipeCache.product_id == product.id
+                ).all()
         else:
             recipes = []
 
@@ -96,13 +111,14 @@ class APIView(FlaskView):
             }
 
         for recipe in recipes:
+            recipe_json = json.loads(recipe.json)
             response['recipes'].append({
-                'rating': recipe['rating'],
-                'time': recipe['totalTimeInSeconds'],
-                'ingredients': recipe['ingredients'],
-                'smallImageUrls': recipe['smallImageUrls'],
-                'name': recipe['recipeName'],
-                'id': recipe['id']
+                'rating': recipe_json['rating'],
+                'time': recipe_json['totalTimeInSeconds'],
+                'ingredients': recipe_json['ingredients'],
+                'smallImageUrls': recipe_json['smallImageUrls'],
+                'name': recipe_json['recipeName'],
+                'id': recipe_json['id']
             })
 
         return jsonify(response), 200

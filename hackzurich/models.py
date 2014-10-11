@@ -22,3 +22,11 @@ class Product(db.Model):
     subtitle = db.Column(db.String(100))
 
     category = db.relationship("Category", uselist=False)
+
+
+class RecipeCache(db.Model):
+    __tablename__ = 'recipes'
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    yummly_id = db.Column(db.String(30))
+    json = db.Column(db.Text)
