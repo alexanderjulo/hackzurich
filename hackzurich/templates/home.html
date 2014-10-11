@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='override.css') }}">
 
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     </head>
 
@@ -14,12 +15,23 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2">
-                        <a href="#" class="navbar-brand">Migrozept</a>
-                        <ul class="nav navbar-nav">
-                            <li><a href="#intro">Intro</a></li>
-                            <li><a href="#get-app">Get the app</a></li>
-                            <li><a href="#try-app">Try the app</a></li>
-                            <li><a href="#background">Background</a></li>
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">Migrozept</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#intro">Intro</a></li>
+                                <li><a href="#get-app">Get the app</a></li>
+                                <li><a href="#try-app">Try the app</a></li>
+                                <li><a href="#background">Background</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -33,13 +45,39 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
+                            <img src="{{ url_for('static', filename='screenshot-ground-beef.png') }}" class="img-responsive">
+                        </div>
+                        <div class="col-sm-6">
                             <p>Ever saw a product in a store that you wanted to eat but had no idea what to cook with it? That is in the past now!</p>
 
                             <p>With migrozept you can scan any interesting item in a migros store and find out what amazing things you could cook with it!</p>
                             <p>Can't find the code or don't have the product nearby right now? Just search for the Name and we will present you with matching results.</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <img src="{{ url_for('static', filename='screenshot-ground-beef.png') }}" class="img-responsive">
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="thumbnail">
+                                        <img src="{{ url_for('static', filename='screenshot-decide.png') }}" class="img-responsive">
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <div class="thumbnail">
+                                        <img src="{{ url_for('static', filename='screenshot-scan.png') }}" class="img-responsive">
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <div class="thumbnail">
+                                        <img src="{{ url_for('static', filename='screenshot-ground-beef.png') }}" class="img-responsive">
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <div class="thumbnail">
+                                        <img src="{{ url_for('static', filename='screenshot-burger.png') }}" class="img-responsive">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="page-header">
@@ -67,36 +105,36 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 col-xs-6">
                                 <div class="thumbnail">
-                                    <img src="{{ url_for('static', filename='hackfleisch.png') }}">
+                                    <img src="{{ url_for('static', filename='hackfleisch.png') }}" class="img-responsive">
                                     <div class="caption">
                                         <p>Hackfleisch, gemischt</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 col-xs-6">
                                 <div class="thumbnail">
-                                    <img src="{{ url_for('static', filename='cherrytomaten.png') }}">
+                                    <img src="{{ url_for('static', filename='cherrytomaten.png') }}" class="img-responsive">
                                     <div class="caption">
                                         <p>Cherrytomaten</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 col-xs-6">
                                 <div class="thumbnail">
-                                    <img src="{{ url_for('static', filename='lachs.png') }}">
+                                    <img src="{{ url_for('static', filename='lachs.png') }}" class="img-responsive">
                                     <div class="caption">
                                         <p>Lachs</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 col-xs-6">
                                 <div class="thumbnail">
-                                    <img src="{{ url_for('static', filename='bier.png') }}">
+                                    <img src="{{ url_for('static', filename='bier.png') }}" class="img-responsive">
                                     <div class="caption">
                                         <p>Bier</p>
                                     </div>

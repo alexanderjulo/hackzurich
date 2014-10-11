@@ -17,6 +17,14 @@ body, p {
     color: white;
 }
 
+.navbar-default .navbar-toggle:hover {
+    background-color: transparent;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
+}
+
 .thumbnail .caption {
     text-align: center;
 }
