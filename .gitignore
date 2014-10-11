@@ -1,2 +1,3 @@
 .venv/
 products.sqlite
+config.py
