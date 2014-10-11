@@ -22,3 +22,16 @@ class APITestCase(BaseTestCase):
         assert r.status_code == 200
         assert r.json is not None
         assert r.json['product']['id'] == bacon.id
+        recipes = r.json.get('recipes')
+        assert recipes is not None and len(recipes) == 0
+
+    def test_bacon_recipes(self):
+        """
+            Verify that recipe retrieval works
+        """
+        ProductFactory()
+        db.session.flush()
+        r = self.client.get('/api/2254623003971?recipes=1')
+        assert r.status_code == 200
+        recipes = r.json.get('recipes')
+        assert recipes is not None and len(recipes) > 0

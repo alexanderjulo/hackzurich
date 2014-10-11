@@ -2,6 +2,7 @@ from flask import jsonify, request
 from flask.ext.classy import FlaskView
 from .models import Product
 from .translate import translate
+from . import yummly
 
 
 def add_cors_support(response):
@@ -67,7 +68,10 @@ class APIView(FlaskView):
 
         english = translate(product.name)
 
-        # TODO: search recipe database for data
+        if request.args.get('recipes') :
+            recipes = yummly.search(english)['matches']
+        else:
+            recipes = []
 
         response = {
             'product': {
@@ -90,6 +94,16 @@ class APIView(FlaskView):
                 'migros_id': product.category.migros_id,
                 'parent_id': product.category.parent_category_id
             }
+
+        for recipe in recipes:
+            response['recipes'].append({
+                'rating': recipe['rating'],
+                'time': recipe['totalTimeInSeconds'],
+                'ingredients': recipe['ingredients'],
+                'smallImageUrls': recipe['smallImageUrls'],
+                'name': recipe['recipeName'],
+                'id': recipe['id']
+            })
 
         return jsonify(response), 200
 
