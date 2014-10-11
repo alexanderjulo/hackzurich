@@ -1,5 +1,10 @@
 from flask.ext.testing import TestCase
+from factory.alchemy import SQLAlchemyModelFactory
 from hackzurich import create_app, db
+
+
+class BaseFactory(SQLAlchemyModelFactory):
+    FACTORY_SESSION = db.session
 
 
 class BaseTestCase(TestCase):
