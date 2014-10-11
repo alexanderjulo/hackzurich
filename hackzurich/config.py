@@ -66,7 +66,7 @@ class EnvironmentConfigObject(ConfigObject):
             For now just load all uppercase options from the
             environment.
         """
-        for option, value in environ.values():
+        for option, value in environ.items():
             if option.isupper():
                 setattr(self, option, value)
 
