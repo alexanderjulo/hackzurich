@@ -53,6 +53,10 @@ class APITestCase(BaseTestCase):
         notatallbacon = ProductFactory()
         notatallbacon.name = "lauch"
         baconcategory = ProductFactory()
+        db.session.add(bacon)
+        db.session.add(notbaconbutrelated)
+        db.session.add(notatallbacon)
+        db.session.add(baconcategory)
         db.session.flush()
         baconcategory.category.name = "Speck"
         db.session.commit()
