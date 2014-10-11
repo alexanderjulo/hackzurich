@@ -66,6 +66,7 @@ class APIView(FlaskView):
 
         if product.category:
             response['product']['category'] = {
+                'id': product.category_id,
                 'name': product.category.name,
                 'description': product.category.name,
                 'migros_id': product.category.migros_id,
