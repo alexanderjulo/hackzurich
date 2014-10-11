@@ -57,7 +57,7 @@ class APITestCase(BaseTestCase):
         inbaconcategory = ProductFactory(category=baconcategory)
         db.session.commit()
 
-        r = self.client.get('/api/search/bacon')
+        r = self.client.get('/api/searchproduct/bacon')
         assert r.status_code == 200
         assert r.json is not None
         products = r.json
