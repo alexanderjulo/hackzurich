@@ -13,6 +13,9 @@ def create_app(configObject=False):
 
     db.init_app(app)
 
+    import api
+    api.setUp(app)
+
     return app
 
 
