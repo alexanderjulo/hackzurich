@@ -1,7 +1,25 @@
-from flask import jsonify
+from flask import jsonify, request
 from flask.ext.classy import FlaskView
 from .models import Product
 from .translate import translate
+
+
+def add_cors_support(response):
+    """
+        Allows cross domain requests for all domains, with all requested
+        headers if necessary.
+    """
+    # I would use *, but I can't because then credentials don't work.
+    response.headers['Access-Control-Allow-Origin'] = \
+        request.headers.get('Origin')
+    if request.headers.get('Access-Control-Request-Headers'):
+        response.headers['Access-Control-Allow-Headers'] = \
+            request.headers['Access-Control-Request-Headers']
+    # allow credentials
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    response.headers['Access-Control-Allow-Methods'] = \
+        'POST, GET, PUT, PATCH, DELETE, OPTIONS'
+    return response
 
 
 class APIView(FlaskView):
@@ -78,3 +96,4 @@ class APIView(FlaskView):
 
 def setUp(app):
     APIView.register(app)
+    app.after_request(add_cors_support)
