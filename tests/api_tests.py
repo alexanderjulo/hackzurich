@@ -1,7 +1,7 @@
 from hackzurich import db
 from hackzurich.models import RecipeCache
 from . import BaseTestCase
-from .model_tests import ProductFactory
+from .model_tests import ProductFactory, CategoryFactory
 
 
 class APITestCase(BaseTestCase):
@@ -47,18 +47,14 @@ class APITestCase(BaseTestCase):
             Check search results are complete
         """
         bacon = ProductFactory()
-        notbaconbutrelated = ProductFactory()
-        notbaconbutrelated.name = "banane"
-        notbaconbutrelated.subtitle = "In Specksaft gelagert"
-        notatallbacon = ProductFactory()
-        notatallbacon.name = "lauch"
-        baconcategory = ProductFactory()
-        db.session.add(bacon)
-        db.session.add(notbaconbutrelated)
-        db.session.add(notatallbacon)
-        db.session.add(baconcategory)
+        notbaconbutrelated = ProductFactory(
+            name="banane",
+            subtitle="In Specksaft gelagert"
+        )
+        notatallbacon = ProductFactory(name="lauch")
+        baconcategory = CategoryFactory(name="speck")
         db.session.flush()
-        baconcategory.category.name = "Speck"
+        inbaconcategory = ProductFactory(category=baconcategory)
         db.session.commit()
 
         r = self.client.get('/api/search/speck')
