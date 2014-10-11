@@ -33,13 +33,6 @@ class ConfigObject(Config):
 
     __metaclass__ = ConfigObjectRegistry
 
-    def __init__(self, root_path):
-        """
-            Initialize all non constant values.
-        """
-        super(ConfigObject, self).__init__(root_path)
-        self.load_config()
-
     def is_relevant(self):
         """
             Check whether the config is relevant to the current environment.
@@ -120,6 +113,7 @@ def get_configs(app):
         for Configobject in ConfigObjectRegistry.entries:
             configobject = Configobject(app)
             if configobject.is_relevant():
+                configobject.load_config()
                 relevant.append(configobject)
     return relevant
 
