@@ -1,5 +1,6 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from raven.contrib.flask import Sentry
 from .config import get_config
 
 
@@ -13,6 +14,9 @@ def create_app(configObject=False):
 
     db.init_app(app)
 
+    if app.config.get('SENTRY_DSN'):
+        sentry.init_app(app)
+
     import api
     api.setUp(app)
 
@@ -20,3 +24,4 @@ def create_app(configObject=False):
 
 
 db = SQLAlchemy()
+sentry = Sentry()
