@@ -4,29 +4,104 @@
         <title>Migrozept</title>
 
         <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='override.css') }}">
+
         <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     </head>
 
     <body>
         <div class="navbar navbar-default">
             <div class="container">
-                <div class="col-sm-8 col-sm-offset-2">
-                    <a href="#" class="navbar-brand">Migrozept</a>
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <a href="#" class="navbar-brand">Migrozept</a>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="container">
-            <div class="col-sm-8 col-sm-offset-2">
-                <div class="page-header">
-                    <h1>Migrozept</h1>
-                </div>
-                <p>Ever saw a product in a store that you wanted to eat but had no idea what to cook with it? That is in the past now!</p>
-                <div class="page-header">
-                    <h2>Get the app</h2>
-                </div>
-                <div class="page-header">
-                    <h2>Technical background</h2>
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="page-header">
+                        <h1>Migrozept</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>Ever saw a product in a store that you wanted to eat but had no idea what to cook with it? That is in the past now!</p>
+
+                            <p>With migrozept you can scan any interesting item in a migros store and find out what amazing things you could cook with it!</p>
+                            <p>Can't find the code or don't have the product nearby right now? Just search for the Name and we will present you with matching results.</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <img src="http://placehold.it/400x600" class="img-responsive img-thumbnail">
+                        </div>
+                    </div>
+                    <div class="page-header">
+                        <h2>Get the app</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <p>Download the exclusive preview for android right here!</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="thumbnail">
+                                <a href="https://build.phonegap.com/apps/1128409/share">
+                                    <img src="https://chart.googleapis.com/chart?chs=150x150&amp;cht=qr&amp;chl=http://build.phonegap.com/apps/1128409/install/eMGVgdUWooR32n4KhksG&amp;chld=L|1&amp;choe=UTF-8" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-header">
+                        <h2>Try it</h2>
+                    </div>
+                    <p>To prove that we are not just making this up you can use our app to find some recipes related to the Migros API.</p>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-4">
+                                <div class="thumbnail">
+                                    <img src="{{ url_for('static', filename='hackfleisch.png') }}">
+                                    <div class="caption">
+                                        <p>Hackfleisch, gemischt</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="thumbnail">
+                                    <img src="{{ url_for('static', filename='cherrytomaten.png') }}">
+                                    <div class="caption">
+                                        <p>Cherrytomaten</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="thumbnail">
+                                    <img src="{{ url_for('static', filename='lachs.png') }}">
+                                    <div class="caption">
+                                        <p>Lachs</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="thumbnail">
+                                    <img src="{{ url_for('static', filename='makrelen.png') }}">
+                                    <div class="caption">
+                                        <p>Makrelen</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="page-header">
+                        <h2>Technical background</h2>
+                    </div>
                 </div>
             </div>
         </div>
