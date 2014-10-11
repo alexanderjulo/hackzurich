@@ -9,12 +9,17 @@
         <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     </head>
 
-    <body>
-        <div class="navbar navbar-default">
+    <body data-spy="scroll" data-target=".navbar-nav">
+        <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2">
                         <a href="#" class="navbar-brand">Migrozept</a>
+                        <ul class="nav navbar-nav">
+                            <li><a href="#intro">Intro</a></li>
+                            <li><a href="#get-app">Get the app</a></li>
+                            <li><a href="#try-app">Try the app</a></li>
+                            <li><a href="#background">Background</a></li>
                     </div>
                 </div>
             </div>
@@ -24,7 +29,7 @@
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
                     <div class="page-header">
-                        <h1>Migrozept</h1>
+                        <h1 id="intro">Migrozept</h1>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
@@ -34,15 +39,17 @@
                             <p>Can't find the code or don't have the product nearby right now? Just search for the Name and we will present you with matching results.</p>
                         </div>
                         <div class="col-sm-6">
-                            <img src="http://placehold.it/400x600" class="img-responsive img-thumbnail">
+                            <img src="{{ url_for('static', filename='screenshot-ground-beef.png') }}" class="img-responsive">
                         </div>
                     </div>
                     <div class="page-header">
-                        <h2>Get the app</h2>
+                        <h2 id="get-app">Get the app</h2>
                     </div>
                     <div class="row">
                         <div class="col-sm-9">
                             <p>Download the exclusive preview for android right here!</p>
+                            <p>Just scan the barcode or click on the link to get it.</p>
+                            <p>iOS coming soon!</p>
                         </div>
                         <div class="col-sm-3">
                             <div class="thumbnail">
@@ -54,7 +61,7 @@
                     </div>
 
                     <div class="page-header">
-                        <h2>Try it</h2>
+                        <h2 id="try-app">Try it</h2>
                     </div>
                     <p>To prove that we are not just making this up you can use our app to find some recipes related to the Migros API.</p>
 
@@ -86,11 +93,20 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-sm-4">
+                                <div class="thumbnail">
+                                    <img src="{{ url_for('static', filename='bier.png') }}">
+                                    <div class="caption">
+                                        <p>Bier</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="page-header">
-                        <h2>Technical background</h2>
+                        <h2 id="background">Technical background</h2>
                     </div>
                 </div>
             </div>
