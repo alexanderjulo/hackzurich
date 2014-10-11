@@ -42,7 +42,9 @@ def crawl():
                     name = product_json.get("name")
                     if name:
                         product.name = name[:99]
-                    product.ean = product_json.get("ean")
+                    ean = product_json.get("ean")
+                    if ean:
+                        product.ean = ean[:13]
                     product.migros_id = product_json.get("id")
                     subtitle = product_json.get("subtit")
                     if subtitle:
