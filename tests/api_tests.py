@@ -24,7 +24,7 @@ class APITestCase(BaseTestCase):
         assert r.json is not None
         assert r.json['product']['id'] == bacon.id
         recipes = r.json.get('recipes')
-        assert recipes is not None and len(recipes) == 0
+        assert isinstance(recipes, list) and len(recipes) == 0
 
     def test_bacon_recipes(self):
         """

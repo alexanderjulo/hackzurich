@@ -69,7 +69,7 @@ class APIView(FlaskView):
 
         english = translate(product.name)
 
-        if request.args.get("recipes") and request.args.get("recipes") == 1:
+        if request.args.get("recipes") and request.args.get("recipes") == '1':
             recipes = RecipeCache.query.filter(
                 RecipeCache.product_id == product.id
             ).all()
