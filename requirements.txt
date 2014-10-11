@@ -17,3 +17,4 @@ raven==5.0.0
 requests==2.4.3
 uWSGI==2.0.7
 wsgiref==0.1.2
+yummly==0.4.0
