@@ -10,8 +10,12 @@ def crawl_category(category_json, parent_id=None):
     if not category:
         category = Category()
         category.migros_id = category_json['id']
-        category.name = category_json['name'][:99]
-        category.description = category_json.get('description')[:99]
+        name = category_json.get('name')
+        if name:
+            category.name = name[:99]
+        description = category_json.get('description')
+        if description:
+            category.description = description[:99]
         category.parent_category_id = parent_id
         db.session.add(category)
         db.session.commit()
@@ -35,10 +39,14 @@ def crawl():
                 ).first()
                 if not product:
                     product = Product()
-                    product.name = product_json.get("name")[:99]
+                    name = product_json.get("name")
+                    if name:
+                        product.name = name[:99]
                     product.ean = product_json.get("ean")
                     product.migros_id = product_json.get("id")
-                    product.subtitle = product_json.get("subtit")[:99]
+                    subtitle = product_json.get("subtit")
+                    if subtitle:
+                        product.subtitle = subtitle[:99]
                     product.category_id = category.id
                     db.session.add(product)
                     db.session.commit()
