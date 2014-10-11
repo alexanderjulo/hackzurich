@@ -36,6 +36,8 @@ class APIView(FlaskView):
 
     def get(self, ean):
         """
+            URL: `/api/<ean>`
+
             Returns product, category and recipe information in the
             following format:
 
@@ -60,6 +62,12 @@ class APIView(FlaskView):
             }
 
             Currently recipe information will not be returned yet.
+
+            Add the recipes=1 query parameter to enable the return
+            of recipes that include the product.
+
+            This function will use queried recipes if possible to
+            reduce the load on the API of yummly.
         """
         product = Product.query.filter(
             Product.ean == ean
@@ -126,6 +134,14 @@ class APIView(FlaskView):
         return jsonify(response), 200
 
     def search(self, term):
+        """
+            URL: `/api/search/<term>`
+
+            Search for a term within product name, product subtitle,
+            category name and category description.
+
+            Will output all data as a json encoded list.
+        """
         like = "%%%s%%"
         category = aliased(Category)
         query = Product.query.join(category).filter(
@@ -137,11 +153,7 @@ class APIView(FlaskView):
             )
         )
 
-        print query
-
         products = query.all()
-
-        print products
 
         response = []
         for product in products:
