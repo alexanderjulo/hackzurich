@@ -73,8 +73,7 @@ class HerokuConfigObject(EnvironmentConfigObject):
         return (environ.get("HEROKU"))
 
     def load_config(self):
-        super(EnvironmentConfigObject, self).load_config()
-        print environ.items()
+        super(HerokuConfigObject, self).load_config()
         if hasattr(self, "DATABASE_URL"):
             self.SQLALCHEMY_DATABASE_URI = self.DATABASE_URL
 
