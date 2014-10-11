@@ -133,9 +133,32 @@ class APIView(FlaskView):
 
         return jsonify(response), 200
 
-    def search(self, term):
+    def searchrecipe(self, term):
         """
-            URL: `/api/search/<term>`
+            URL: `/api/searchrecipe/<term>/`
+        """
+        english = translate(term)
+        recipes = yummly.search(english)['matches']
+
+        response = []
+
+        for recipe in recipes:
+            response.append({
+                'rating': recipe['rating'],
+                'time': recipe['totalTimeInSeconds'],
+                'ingredients': recipe['ingredients'],
+                'smallImageUrls': recipe['smallImageUrls'],
+                'name': recipe['recipeName'],
+                'id': recipe['id']
+            })
+        return Response(
+            json.dumps(response),
+            mimetype="application/json"
+        ), 200 if len(response) > 0 else 404
+
+    def searchproduct(self, term):
+        """
+            URL: `/api/searchproduct/<term>`
 
             Search for a term within product name, product subtitle,
             category name and category description. Use an english word

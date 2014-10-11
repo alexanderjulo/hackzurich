@@ -62,3 +62,12 @@ class APITestCase(BaseTestCase):
         assert r.json is not None
         products = r.json
         assert len(products) == 3
+
+    def test_search_recipes(self):
+        """
+            Directly search the yummly API with ingredient names.
+        """
+        r = self.client.get('/api/searchrecipe/bacon')
+        assert r.status_code == 200
+        assert r.json is not None
+        assert len(r.json) > 0
