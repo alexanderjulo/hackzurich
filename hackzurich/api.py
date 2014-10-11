@@ -78,7 +78,7 @@ class APIView(FlaskView):
                 for recipe in recipes:
                     cache = RecipeCache()
                     cache.product_id = product.id
-                    cache.yummly_id = recipe['id']
+                    cache.yummly_id = recipe['id'][:30]
                     cache.json = json.dumps(recipe)
                     db.session.add(cache)
                 db.session.commit()
